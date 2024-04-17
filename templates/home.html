@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الرئيسية</title>
+    <link rel="stylesheet" href="{% static 'style/home.css' %}">
+</head>
+<body>
+    
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+
+    <form class="overlay" method="POST">
+        {% csrf_token %}
+        <h1>ادخل المبلغ الذي تريد سحبة</h1>
+        <p>يجب ان يكون أقل من 340 EGP</p>
+        <input type="text" placeholder="أدخل المبلغ هنا" name="amout">
+        <div class="btns">
+            <button class="can" type="button">الغاء</button>
+            <button class="wit" type="submit">طلب سحب</button>
+        </div>
+    </form>
+
+    <div class="user">
+
+        <div class="left">
+            <img src="{{main_url}}{{c_user.picture}}" alt="">
+            <p>{{c_user.full_name}}</p>
+            <a href="{% url 'logout' %}" class="logout">تسجيل الخروج</a>
+        </div>
+
+        <form class="right" method="POST">
+            {% csrf_token %}
+            <p>الرصيد الحالي</p>
+            <h3>{{c_user.balance}} EGP</h3>
+            <div class="in">
+                <input type="number" min="100" placeholder="ادخل المبلغ لشحن رصيدك" name="amount">
+                <button type="submit">شحن</button>
+            </div>
+            <button class="witdraw" id="witdrawBtn" type="button">اسحب فلوسك</button>
+        </form>
+
+    </div>
+
+    <div class="create-gamia">
+        <a href="#">انشاء جمعية</a>
+    </div>
+    
+    <div class="all-gams">
+        <h1>جمعياتك</h1>
+
+        <!-- <div class="cont">
+            <a href="#">عرض</a>
+            <div class="text">
+                <p>جمعية خاصة ب : رضوان</p>
+                <p>لم تبدأ بعد</p>
+            </div>
+        </div> -->
+
+
+    </div>
+
+    <script>
+        // view withdraw form
+        var ViewBtn = document.getElementById('witdrawBtn');
+        var overlay = document.querySelector('.overlay');
+        var CancelBtn = overlay.querySelector('.btns .can');
+
+        ViewBtn.addEventListener('click',()=>{
+            overlay.classList.add('view');
+        })
+        
+        CancelBtn.addEventListener('click',()=>{
+            overlay.classList.remove('view');
+        })
+
+
+    </script>
+
+</body>
+</html>

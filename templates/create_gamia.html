@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>انشاء حساب</title>
+    <link rel="stylesheet" href="style/form.css">
+</head>
+<body>
+    <img src="images/bg.png" class="bg" alt="">
+    <div class="container">
+        <div class="in">
+            <p>عدد الأشخاص في جمعيتك </p>
+            <input type="number" id="members">
+        </div>
+        <div class="in">
+            <p>المبلغ المحدد من كل مستخدم</p>
+            <input type="number" id="price_per_user">
+        </div>
+        <div class="in">
+            <p>الدفع كل كام يوم</p>
+            <input type="number" id="pay_every">
+        </div>
+        
+        <div class="in">
+            <p>المبلغ الكلي للفرد الواحد خلال <span id="total_days">-</span> <span id="day_name">يوم</span></p>
+            <input type="number" readonly id="total_money">
+        </div>
+
+        <div class="btns">
+            <a href="#">الرئيسية</a>
+            <button>انشاء</button>
+        </div>
+    </div>
+
+
+    <script>
+        var TotalMembers = document.getElementById('members');
+        var PricePerUser = document.getElementById('price_per_user');
+        var PayEvery = document.getElementById('pay_every');
+        var TotalDays = document.getElementById('total_days');
+        var TotalMoney = document.getElementById('total_money');
+        var DayName = document.getElementById('day_name');
+
+        function to_int(obj){
+            return parseInt(obj.value)
+        } 
+
+
+        PayEvery.onchange = function(){
+            TotalDays.textContent = PayEvery.value;
+            TotalMoney.value = to_int(TotalMembers) * to_int(PricePerUser);
+        }
+
+        
+        
+    </script>
+
+</body>
+</html>

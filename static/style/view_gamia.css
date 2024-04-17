@@ -1,0 +1,148 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --var-font:"Cairo",sans-serif;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+img.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+}
+
+.up {
+    width: 500px;
+    height: auto;
+    padding: 0.9rem 1.9rem;
+    backdrop-filter: blur(30px);
+    background-color: #ffffff10;
+    border-radius: 30px;
+    text-align: center;
+    direction: rtl;
+    line-height: 25px;
+    position: relative;
+    font-family: var(--var-font);
+}
+
+.up h3 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.up p {
+    color: #A5A5A5;
+    direction: rtl;
+    font-size: 14px;
+}
+
+.up .state {
+    position: absolute;
+    font-size: 13px;
+    color: #fff;
+    padding: 6px 12px;
+    background-color: #E5E521;
+    border-radius: 12px;
+    left: 10px;
+}
+
+.up .state.active {
+    background-color: #21E555;
+}
+
+
+.current_balance {
+    width: 350px;
+    height: auto;
+    backdrop-filter: blur(30px);
+    background-color: #ffffff10;
+    padding: 1.4rem 3rem;
+    border-radius: 30px;
+    text-align: center;
+    font-family: var(--var-font);
+}
+
+.current_balance p {
+    color: #A5A5A5;
+    font-weight: lighter;
+}
+
+.current_balance h3 {
+    color: #fff;
+}
+
+
+.user {
+    width: 500px;
+    height: 70px;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    backdrop-filter: blur(30px);
+    background-color: #ffffff10;
+    padding: 1.3rem 1.9rem;
+    border-radius: 30px;
+}
+
+.user small {
+    flex: 1;
+    color: #A5A5A5;
+    font-weight: bold;
+    font-family: var(--var-font);
+}
+
+.user small.active {
+    color: #21E555;
+}
+.user .right {
+    display: flex;
+    flex: 1;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user .right img {
+    width: 50px;
+    height: 50px;
+}
+
+.user .right p {
+    direction: rtl;
+    color: #fff;
+    font-family: var(--var-font);
+    font-size: 12px;
+}
+
+.user .recived {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #E5E521;
+}
+
+.user .recived.true {
+    background-color: #21E555;
+}
+
