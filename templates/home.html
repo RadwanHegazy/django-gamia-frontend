@@ -9,13 +9,16 @@
 </head>
 <body>
     
+    {% for msg in messages %}
+        <script>alert("{{msg}}")</script>
+    {% endfor %}
     <img src="{% static 'images/bg.png' %}" alt="" class="bg">
 
-    <form class="overlay" method="POST">
+    <form class="overlay" method="POST" action="{% url 'withdraw' %}">
         {% csrf_token %}
         <h1>ادخل المبلغ الذي تريد سحبة</h1>
-        <p>يجب ان يكون أقل من 340 EGP</p>
-        <input type="text" placeholder="أدخل المبلغ هنا" name="amout">
+        <p>يجب ان يكون أقل من {{c_user.balance}} EGP</p>
+        <input type="text" placeholder="أدخل المبلغ هنا" name="amount" max="{{c_user.balance}}" min="10">
         <div class="btns">
             <button class="can" type="button">الغاء</button>
             <button class="wit" type="submit">طلب سحب</button>
@@ -30,7 +33,7 @@
             <a href="{% url 'logout' %}" class="logout">تسجيل الخروج</a>
         </div>
 
-        <form class="right" method="POST">
+        <form class="right" method="POST" action="{% url 'charge' %}">
             {% csrf_token %}
             <p>الرصيد الحالي</p>
             <h3>{{c_user.balance}} EGP</h3>
@@ -44,20 +47,25 @@
     </div>
 
     <div class="create-gamia">
-        <a href="#">انشاء جمعية</a>
+        <a href="{% url 'create_gamia' %}">انشاء جمعية</a>
     </div>
     
     <div class="all-gams">
         <h1>جمعياتك</h1>
 
-        <!-- <div class="cont">
-            <a href="#">عرض</a>
-            <div class="text">
-                <p>جمعية خاصة ب : رضوان</p>
-                <p>لم تبدأ بعد</p>
+        {% for i in list_data %}
+            <div class="cont">
+                <a href="{% url 'get_gamia' i.id %}">عرض</a>
+                <div class="text">
+                    <p>{{i.title}}</p>
+                    {% if i.start_at %}
+                        <p>{{i.start_at}} -> {{i.end_at}}</p>
+                    {% else %}
+                        <p>لم تبدأ بعد</p>
+                    {% endif %}
+                </div>
             </div>
-        </div> -->
-
+        {% endfor %}
 
     </div>
 

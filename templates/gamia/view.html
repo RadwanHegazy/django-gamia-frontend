@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جمعية خاصة ب : رضوان</title>
+    <link rel="stylesheet" href="{% static 'style/view_gamia.css' %}">
+</head>
+<body>
+
+
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+
+    <div class="up">
+        {% if gamia.start_at %}
+            <small class="state active">بدأت الجمعية</small>
+        {% else %}
+            <small class="state">لم تبدأ بعد</small>
+        {% endif %}
+        <h3>{{gamia.title}}</h3>
+        <p>عدد الاعضاء الكلي : {{gamia.members_count}} </p>
+        <p>عدد الاعضاء حاليا : {{current_members_count}}</p>
+        <p>المبلغ المطلوب كل {{gamia.every_days_count}} أيام من كل شخص هو : {{gamia.price_per_user}} EGP</p>
+        <p> اجمالي القبض للفرد هو : {{gamia.total_money_per_user}} EGP</p>
+    </div>
+
+    <div class="current_balance">
+        <p>المبلغ الحالي في الجمعية</p>
+        <h3>{{gamia.current_balance}} EGP</h3>
+    </div>
+
+    {% for member in members %}
+            <div class="user">
+                {% if member.hasReceived %}
+                    <small class="active">تم الاستلام بنجاح</small>
+                    <div class="recived true"></div>
+                {% else %}
+                    {% if member.recived_money_at %}
+                        <small>{{member.recived_money_at}}</small>
+                    {% else %}
+                        <small>--</small>
+                    {% endif %}
+                    <div class="recived"></div>
+                {% endif %}
+                <div class="right">
+                    <img src="{{main_url}}{{member.user.picture}}" alt="">
+                    <p>ميعاد قبض {{member.user.full_name}}</p>
+                </div>
+            </div>
+    {% endfor %}
+    
+
+    
+</body>
+</html>
