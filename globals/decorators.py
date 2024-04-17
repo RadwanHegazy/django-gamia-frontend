@@ -11,11 +11,14 @@ def login_required (function) :
         if user is None :
             return redirect('login')
         
+        headers = {'Authorization':f"Bearer {user}"}
+        kwargs['headers'] = headers
         action = Action(
             url = MAIN_URL + '/user/profile/',
-            headers = {'Authorization':f"Bearer {user}"}
+            headers = headers
         )
 
+        
         action.get()
 
         if not action.is_valid() : 

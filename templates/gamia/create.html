@@ -1,25 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>انشاء حساب</title>
-    <link rel="stylesheet" href="style/form.css">
+    <link rel="stylesheet" href="{% static 'style/form.css' %}">
 </head>
 <body>
-    <img src="images/bg.png" class="bg" alt="">
-    <div class="container">
+    
+    <img src="{% static 'images/bg.png' %}" class="bg" alt="">
+
+    <form class="container" method="POST">
+        {% csrf_token %}
         <div class="in">
             <p>عدد الأشخاص في جمعيتك </p>
-            <input type="number" id="members">
+            <input type="number" id="members" name="max_users_count">
         </div>
         <div class="in">
             <p>المبلغ المحدد من كل مستخدم</p>
-            <input type="number" id="price_per_user">
+            <input type="number" id="price_per_user" name="price_per_user">
         </div>
         <div class="in">
             <p>الدفع كل كام يوم</p>
-            <input type="number" id="pay_every">
+            <input type="number" id="pay_every" name="pay_every_days">
         </div>
         
         <div class="in">
@@ -28,10 +32,12 @@
         </div>
 
         <div class="btns">
-            <a href="#">الرئيسية</a>
-            <button>انشاء</button>
+            <a href="{% url 'profile' %}">الرئيسية</a>
+            <button type="submit">انشاء</button>
         </div>
-    </div>
+    
+    </form>
+
 
 
     <script>
